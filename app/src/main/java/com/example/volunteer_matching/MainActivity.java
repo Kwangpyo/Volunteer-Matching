@@ -10,8 +10,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //hellu~~~~~I'm kung kwang~~
-
+        //dsdaf
 
     }
 }
