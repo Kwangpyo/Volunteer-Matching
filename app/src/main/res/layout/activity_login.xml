@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:id="@+id/emailInput"
         android:layout_centerHorizontal="true"
-        android:hint="ID"
+        android:hint="@+string/ID"
         android:layout_marginTop="151dp" />
 
     <EditText
@@ -19,12 +19,12 @@
         android:layout_height="50dp"
         android:id="@+id/passwordInput"
         android:layout_centerHorizontal="true"
-        android:hint="Password"
+        android:hint="@+string/Password"
         android:layout_below="@+id/emailInput" />
     <Button
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:text="로그인"
+        android:text="@+string/로그인"
         android:id="@+id/loginButton"
         android:textAllCaps="false"
         android:layout_marginTop="20dp"
@@ -34,7 +34,7 @@
     <Button
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:text="회원가입"
+        android:text="@+string/회원가입"
         android:id="@+id/signupButton"
         android:textAllCaps="false"
         android:layout_alignTop="@+id/loginButton"
@@ -43,7 +43,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="자동로그인"
+        android:text="@+string/자동로그인"
         android:id="@+id/checkBox"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/loginButton"
