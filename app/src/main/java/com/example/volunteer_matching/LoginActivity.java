@@ -1,8 +1,11 @@
 package com.example.volunteer_matching;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -10,6 +13,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     EditText idInput, passwordInput;
+    Button btn_signup,btn_login;
     CheckBox autoLogin;
     Boolean loginChecked;
     SharedPreferences pref;
@@ -22,44 +26,65 @@ public class LoginActivity extends AppCompatActivity {
         idInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
         autoLogin = (CheckBox) findViewById(R.id.checkBox);
+        SharedPreferences pref = getSharedPreferences("pref_loginInfo", MODE_PRIVATE);
 
-        // if autoLogin checked, get input
+        btn_signup = (Button) findViewById(R.id.signupButton);
+        btn_login = (Button) findViewById(R.id.loginButton);
+
+        btn_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toSignup = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(toSignup);
+                finish();
+            }
+        });
+
         if (pref.getBoolean("autoLogin", false)) {
             idInput.setText(pref.getString("id", ""));
             passwordInput.setText(pref.getString("pw", ""));
+            Intent toSelectUser = new Intent(LoginActivity.this, SelectUserActivity.class);
             autoLogin.setChecked(true);
-            // goto mainActivity
-
+            startActivity(toSelectUser);
+            finish();
         } else {
-            // if autoLogin unChecked
-            String id = idInput.getText().toString();
-            String password = passwordInput.getText().toString();
-            Boolean validation = loginValidation(id, password);
+            btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // if autoLogin unChecked
+                String id = idInput.getText().toString();
+                String password = passwordInput.getText().toString();
+                Boolean validation = loginValidation(id, password);
 
-            if(validation) {
-                Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_LONG).show();
-                // save id, password to Database
+                if (validation) {
+                    Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_LONG).show();
+                    Intent toSelectUser = new Intent(LoginActivity.this, SelectUserActivity.class);
+                    startActivity(toSelectUser);
+                    finish();
+                    // save id, password to Database
 
-                if(loginChecked) {
-                    // if autoLogin Checked, save values
-                    editor.putString("id", id);
-                    editor.putString("pw", password);
-                    editor.putBoolean("autoLogin", true);
-                    editor.commit();
+                    if (loginChecked) {
+                        // if autoLogin Checked, save values
+                        editor.putString("id", id);
+                        editor.putString("pw", password);
+                        editor.putBoolean("autoLogin", true);
+                        editor.commit();
+                    }
+                    // goto mainActivity
+
+                } else {
+                    Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_LONG).show();
+                    // goto LoginActivity
+                 }
                 }
-                // goto mainActivity
-
-            } else {
-                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
-                // goto LoginActivity
-            }
+            });
         }
 
         // set checkBoxListener
         autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     loginChecked = true;
                 } else {
                     // if unChecked, removeAll
