@@ -15,7 +15,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText idInput, passwordInput;
     Button btn_signup,btn_login;
     CheckBox autoLogin;
-    Boolean loginChecked;
+    Boolean loginChecked=false;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -26,7 +26,8 @@ public class LoginActivity extends AppCompatActivity {
         idInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
         autoLogin = (CheckBox) findViewById(R.id.checkBox);
-        SharedPreferences pref = getSharedPreferences("pref_loginInfo", MODE_PRIVATE);
+        pref = getSharedPreferences("pref_loginInfo", MODE_PRIVATE);
+        editor = pref.edit();
 
         btn_signup = (Button) findViewById(R.id.signupButton);
         btn_login = (Button) findViewById(R.id.loginButton);
@@ -40,14 +41,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if (pref.getBoolean("autoLogin", false)) {
+        if (pref.getBoolean("autoLogin", false)) {//자동로그인으로 로그인 정보 저장되어있는 경우
             idInput.setText(pref.getString("id", ""));
             passwordInput.setText(pref.getString("pw", ""));
             Intent toSelectUser = new Intent(LoginActivity.this, SelectUserActivity.class);
             autoLogin.setChecked(true);
             startActivity(toSelectUser);
             finish();
-        } else {
+        } else {//자동로그인 정보가 없는 경우
             btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +98,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean loginValidation(String id, String password) {
-        if(pref.getString("id","").equals(id) && pref.getString("pw","").equals(password)) {
+        if(id.equals(null)){
+            Toast.makeText(LoginActivity.this, "아이디를 입력하세요", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(password.equals(null)){
+            Toast.makeText(LoginActivity.this, "비밀번호를 입력하세요", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(pref.getString("id","").equals(id) && pref.getString("pw","").equals(password)) {//여기서 db뒤져서 맞는지 확인해야함 Pref대신 쿼리 날려서
             // login success
             return true;
         } else if (pref.getString("id","").equals(null)){
