@@ -98,11 +98,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean loginValidation(String id, String password) {
-        if(id.equals(null)){
+        if(id.equals("")){
             Toast.makeText(LoginActivity.this, "아이디를 입력하세요", Toast.LENGTH_LONG).show();
             return false;
         }
-        else if(password.equals(null)){
+        else if(password.equals("")){
             Toast.makeText(LoginActivity.this, "비밀번호를 입력하세요", Toast.LENGTH_LONG).show();
             return false;
         }
