@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 
 // 테스트용 라우트
-const test = require('./server/routes/test');
+const test = require('./server/routes/main');
 
 // 수강신청 라우트 && 시간표조회 라우트
 //const doajou = require('./server/routes/doAjou');
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname,'dist')));
 }));*/
 
 //test.js를 'localhost:3000/test' 에 대한 라우터로 설정
-app.use('/test',test);
+app.use('/',test);
 
 //모든 경로에 대한 라우터 설정 및 반환 파일 경로 설정
 app.get('*',function(req,res){
