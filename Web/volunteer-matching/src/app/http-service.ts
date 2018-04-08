@@ -5,9 +5,9 @@ import {HttpClient} from '@angular/common/http';
 export class HttpService {
   constructor(private http: HttpClient) {}
   getTest() {
-      return this.http.get('/test/testGET?test=test get request from angular');
+      return this.http.get('/testGET?test=test get request from angular');
   }
   postTest() {
-    return this.http.post('/test/testPOST',{test: 'test post request from angular'});
+    return this.http.post('/testPOST',{test: 'test post request from angular'});
   }
 }
