@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="item_position">
+        <item>서울</item>
+        <item>경기</item>
+        <item>강원</item>
+        <item>충청</item>
+        <item>경상</item>
+        <item>전라</item>
+        <item>제주</item>
+        <item>울릉</item>
+        <item>독도</item>
+    </string-array>
+    <string-array name="item_type">
+        <item>일상</item>
+        <item>외출</item>
+        <item>집안일</item>
+    </string-array>
+    <string-array name="item_object">
+        <item>장애인</item>
+        <item>노약자</item>
+        <item>환자</item>
+    </string-array>
+    <string-array name="item_time">
+        <item>1시간</item>
+        <item>2시간</item>
+        <item>3시간</item>
+        <item>4시간</item>
+        <item>5시간 이상</item>
+    </string-array>
+
+</resources>
