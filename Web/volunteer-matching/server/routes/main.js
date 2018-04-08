@@ -29,4 +29,20 @@ router.post('/testPOST',function(req,res){
   res.send({test : 'response data from POST handler'});
 });
 
+//스키마 만들기
+var managerSchema = new mongoose.Schema({
+  //광표야 여기
+  /*ex)  title : String,
+  content : String*/
+});
+//모델 만들기
+var Manager = mongoose.model('Manager',managerSchema);
+// POST 요청
+router.post('/requestSignUp',function (req,res) {
+  Manager.findOne({},function (err,info) {
+    
+  })
+  
+})
+
 module.exports = router;
