@@ -32,7 +32,6 @@ app.use(express.static(path.join(__dirname,'dist')));
 //test.js를 'localhost:3000/test' 에 대한 라우터로 설정
 app.use('/test',test);
 
-
 //모든 경로에 대한 라우터 설정 및 반환 파일 경로 설정
 app.get('*',function(req,res){
   res.sendFile(path.join(__dirname,'dist/index.html'));
