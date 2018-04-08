@@ -40,9 +40,28 @@ var Manager = mongoose.model('Manager',managerSchema);
 // POST 요청
 router.post('/requestSignUp',function (req,res) {
   Manager.findOne({},function (err,info) {
-    
+    var isValid = {boolean: false};
+    if(err){
+      return console.log("err :"+err);
+    }
+    if(info){//이미 존재하는 ID
+      console.log('아이디 중복: '+info.userID);
+      res.send(isValid);
+    }
+    else {//존재하지 않는 ID
+      var managerInfo = new Manager();
+      //managerInfo.~생략
+
+      Manager.save(function (err, document) {
+        if (err) {
+          return console.log("err :" + err);
+        }
+        isVaild = {boolean: true};
+        res.send(isValid);
+        console.log('아이디 생성 완료: ' + document);
+      });
+    }
   })
-  
-})
+});
 
 module.exports = router;
